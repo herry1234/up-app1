@@ -1,0 +1,7 @@
+{
+    "name": "redditapi",
+    "profile": "default",
+    "regions": [
+        "us-east-1"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "up-app1",
+  "version": "1.0.0",
+  "description": "scrapping web",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2"
+  }
+}
