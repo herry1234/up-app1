@@ -4,19 +4,20 @@ const buffstreamzStreamer = require('./getBuffstreamz');
 async function run() {
     const response = await axios.get('https://www.reddit.com/r/nbastreams/');
     const $ = cheerio.load(response.data);
-    const TABLE_SELECTOR = 'thing';
-    const GAME_THREAD_SELECTOR = '#ID > div:nth-child(4) > div:nth-child(1) > p:nth-child(1) > span:nth-child(2)';
-    const GAME_THREAD_LINK = '#ID > div:nth-child(4) > div:nth-child(1) > p:nth-child(1) > a:nth-child(1)'
+    const GAME_THREAD_SELECTOR = '#ID > div:nth-child(2) > div:nth-child(2) > span:nth-child(1) > a:nth-child(1) > div:nth-child(2) > span:nth-child(1)';
+    const GAME_THREAD_LINK = '#ID > div:nth-child(2) > div:nth-child(2) > span:nth-child(1) > a:nth-child(1)'
     let id_list = []
-    $('.thing').each(function (i, el) {
+    $('.scrollerItem').each(function (i, el) {
         id_list.push($(this).attr('id'));
     })
     console.log('total topics#', id_list.length);
     let id_link_list = [];
     for (let i = 0; i < id_list.length; i++) {
+        console.log(id_list[i]);
+        if(id_list[i].length > 40) continue;
         let game_thread_s = GAME_THREAD_SELECTOR.replace('ID', id_list[i]);
         let game_thread_link_s = GAME_THREAD_LINK.replace('ID', id_list[i]);
-        let is_game_thread = $(game_thread_s).attr('title') === "Game Thread"
+        let is_game_thread = $(game_thread_s).text() === "Game Thread"
 
         if (is_game_thread) {
             const myurl = $(game_thread_link_s).attr('href');
